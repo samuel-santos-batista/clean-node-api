@@ -118,7 +118,7 @@ describe('Signup Controller', () => {
 
   test('Should call EmailValidator with correct email', async () => {
     const { sut, emailValidatorStub } = makeSut()
-    const isValldSpy = jest.spyOn(emailValidatorStub, 'isValid')
+    const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
     const httpRequest = {
       body: {
         name: 'any_name',
@@ -128,7 +128,7 @@ describe('Signup Controller', () => {
       }
     }
     await sut.handle(httpRequest)
-    expect(isValldSpy).toHaveBeenCalledWith('any_email@email.com')
+    expect(isValidSpy).toHaveBeenCalledWith('any_email@email.com')
   })
 
   test('Should return 500 if EmailValidator trows', async () => {
