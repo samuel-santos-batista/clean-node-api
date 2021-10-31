@@ -19,7 +19,7 @@ const makeAddAccountRepository = (): AddAccountRepository => {
 const makeEncrypter = (): Encrypter => {
   class EncrypterStub implements Encrypter {
     encrypt (value: string): Promise<string> {
-      return new Promise(resolve => resolve('hased_password'))
+      return new Promise(resolve => resolve('hashed_password'))
     }
   }
   return new EncrypterStub()
@@ -77,7 +77,7 @@ describe('DbAddAccount Usecase', () => {
     expect(addSpy).toHaveBeenCalledWith({
       name: 'valid_name',
       email: 'valid_email',
-      password: 'hased_password'
+      password: 'hashed_password'
     })
   })
 
@@ -91,5 +91,21 @@ describe('DbAddAccount Usecase', () => {
     }
     const promise = sut.add(accountData)
     await expect(promise).rejects.toThrow()
+  })
+
+  test('Should return an account if on success', async () => {
+    const { sut } = makeSut()
+    const accountData = {
+      name: 'valid_name',
+      email: 'valid_email',
+      password: 'valid_password'
+    }
+    const account = await sut.add(accountData)
+    expect(account).toEqual({
+      id: 'valid_id',
+      name: 'valid_name',
+      email: 'valid_email',
+      password: 'hashed_password'
+    })
   })
 })
