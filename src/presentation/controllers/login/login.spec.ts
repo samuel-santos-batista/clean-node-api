@@ -1,5 +1,5 @@
 import { InvalidParamError } from '../../erros'
-import { badRequest, ok, unauthorized } from '../../helper/http-helper'
+import { badRequest, ok, unauthorized } from '../../helper/http/http-helper'
 import { LoginController } from './login'
 import { Authentication, Validation } from './login-protocols'
 
