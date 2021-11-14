@@ -1,7 +1,7 @@
 import { InvalidParamError } from '../../erros'
 import { badRequest, ok, unauthorized } from '../../helper/http/http-helper'
-import { LoginController } from './login'
-import { Authentication, AuthenticationModel, Validation } from './login-protocols'
+import { LoginController } from './login-controller'
+import { Authentication, AuthenticationModel, Validation } from './login-controller-protocols'
 
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
