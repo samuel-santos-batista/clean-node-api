@@ -1,7 +1,7 @@
 import { InvalidParamError } from '../../erros'
 import { badRequest, ok, unauthorized } from '../../helper/http/http-helper'
 import { LoginController } from './login-controller'
-import { Authentication, AuthenticationModel, Validation } from './login-controller-protocols'
+import { Authentication, AuthenticationModel, Validation, HttpRequest } from './login-controller-protocols'
 
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
@@ -21,7 +21,7 @@ const makeValidation = (): Validation => {
   return new ValidationStub()
 }
 
-const makeFakeRequest = () => ({
+const makeFakeRequest = (): HttpRequest => ({
   body: {
     email: 'any_email@gmail.com',
     password: 'any_password'
@@ -49,7 +49,10 @@ describe('LoginController', () => {
     const { sut, authenticationStub } = makeSut()
     const authSpy = jest.spyOn(authenticationStub, 'auth')
     await sut.handle(makeFakeRequest())
-    expect(authSpy).toHaveBeenCalledWith({ email: 'any_email@gmail.com', password: 'any_password' })
+    expect(authSpy).toHaveBeenCalledWith({
+      email: 'any_email@gmail.com',
+      password: 'any_password'
+    })
   })
 
   test('Should return 401 if invalid credentials are provided', async () => {
