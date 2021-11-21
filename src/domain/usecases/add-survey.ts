@@ -8,6 +8,6 @@ export interface AddSurveyModel {
   answers: SurveyAnswer[]
 }
 
-export interface AddSurvey{
-  add (account: AddSurveyModel): Promise<void>
+export interface AddSurvey {
+  add (data: AddSurveyModel): Promise<void>
 }
