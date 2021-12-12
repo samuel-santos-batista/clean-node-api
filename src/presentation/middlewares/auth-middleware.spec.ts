@@ -1,6 +1,4 @@
-import { AccountModel } from '../../domain/models/account'
-import { HttpRequest } from '../../presentation/protocols'
-import { LoadAccountByToken } from '../../domain/usecases/load-account-by-token'
+import { HttpRequest, AccountModel, LoadAccountByToken } from './auth-middleware-protocols'
 import { AccessDeniedError } from '../erros'
 import { forbidden, ok, serverError } from '../helper/http/http-helper'
 import { AuthMiddleware } from './auth-middleware'
